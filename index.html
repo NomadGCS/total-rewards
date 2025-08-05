@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Total Compensation Summary</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap');
+
+        :root {
+            /* --main-color:  #cc2027; */
+            --main-color: #ce1b22;
+            --secondary-color: #E2E3E2;
+            --tertiary-color: #000;
+
+            --accent-border-height: 10px;
+        }
+
+        body {
+            font-size: 16px;
+            font-family: Inter, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+
+        .content {
+            margin: auto;
+            max-width: 1200px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h3 {
+            text-transform: uppercase;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .card {
+            background: white;
+            /* padding: 1.5rem; */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* max-width: 800px; */
+            margin: auto;
+            margin: 3em;
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            align-items: center;
+            /* justify-content: space-between; */
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item span:last-child {
+            text-align: right;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .category {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .total {
+            font-weight: bold;
+            /* font-size: 1.6rem; */
+            font-size: calc(12px + 1.4vw);
+            color: #2c3e50;
+
+        }
+
+
+        /* SECTIONS */
+
+        .brand {
+            margin: 2em;
+        }
+
+        #title {
+            font-size: calc(12px + 3.5vw);
+            /* font-size: 3.5rem;  */
+            font-weight: 700;
+            text-align: center
+        }
+
+        .executive-summary {
+            padding: 3em;
+            margin-bottom: 1em;
+
+            .instructions {
+                padding-block: 1em;
+                text-align: center;
+            }
+        }
+
+        .personalized-rewards-heading {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            text-align: center;
+
+        }
+
+        #total-rewards {
+            color: var(--main-color);
+            font-size: calc(12px + 6.5vw);
+            /* font-size: 6em; */
+            text-align: center;
+        }
+
+        .overtime {
+            border: 2px solid var(--main-color);
+            color: var(--main-color);
+            padding: 1em;
+            margin: 1em;
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        #tagline {
+            font-size: 1.2em;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 1em;
+        }
+
+        /* INPUTS */
+
+        .inputs {            
+            border: 1px solid #ccc;            
+            background: #efefef;
+            border-radius: 4px;
+
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center
+        }
+
+        input[type="number"] {
+            width: 80px;
+            padding: 0.2rem;
+            margin-left: 0.5rem;
+            font-size: 1.2em;
+        }
+
+        label {
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            /* margin-bottom: 0.5rem; */
+        }
+
+        button {
+            line-height: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.015rem;
+            border-radius: 4px;
+            color: #fff;
+            background-color: var(--main-color);
+            padding: 0.5em 1rem;
+            outline: none;
+            border: none;
+
+            a {
+                text-decoration: none;
+                color: unset;
+            }
+        }
+
+        button:focus {
+            outline: 3px solid var(--main-color);
+            outline-offset: 2px;
+            box-shadow: 0 0 5px var(--main-color);
+        }
+
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .responsive-grid>div {
+            border-bottom: 1px solid #dedede;
+            /* color: purple; */
+        }
+
+
+
+        /* CHART */
+
+        canvas {
+            display: block;
+            margin: 2rem auto;
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        #chartValue {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            top: -60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: black;
+            pointer-events: none;
+            white-space: pre-line;
+        }
+
+        #chartValue strong {
+            font-size: clamp(1rem, 3.5vw, 2.5rem);
+            padding-bottom: 12px;
+        }
+
+        #chartValue span {
+            font-size: clamp(0.8rem, 2vw, 1rem);
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            /* background: #f6f6f6; */
+            background: #efefef;
+            /* max-width: 600px; */
+            aspect-ratio: 1 / 1;
+            margin: auto;
+            padding-inline: 4rem;
+            padding-block: 2rem;
+            box-sizing: border-box;
+            margin-top: 2em;
+        }
+
+        /* -------------------------------------------------------------------------------- */
+        /*                                  MEDIA QUERIES                                   */
+        /* -------------------------------------------------------------------------------- */
+
+        @media (max-width: 799px) {
+            body {
+                font-size: 14px;
+                /* color: purple; */
+            }
+
+            .content {
+                margin: 0rem;
+            }
+
+            .executive-summary {
+                padding: 2em;
+            }
+
+            #tagline {
+                margin-bottom: 2em;
+            }
+
+            .card {                
+                margin: 2em;                
+            }
+
+            .chart-container {
+                padding-inline: 0rem;
+                padding-block: 0rem;
+            }
+
+            #chartValue {
+                top: -45px;
+
+                span {
+                    display: none;
+                }
+
+                strong {
+                    font-size: calc(12px + 2.5vw);
+                }
+            }
+
+            .responsive-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item {
+                display: grid;
+                grid-template-columns: 60% 40%;
+            }
+        }
+
+        @media (max-width: 549px) {
+            body {
+                /* font-size: 12px; */
+                /* color: forestgreen; */
+            }
+
+            .executive-summary {
+                padding: 1em;
+            }
+
+            .card {
+                margin: 1em;
+            }
+
+            #chartValue strong {
+                display: none;
+            }
+
+            .inputs {
+                flex-direction: column;
+                gap: 1em;
+            }
+
+            .copyright-notice {
+                padding-inline: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+
+        <div class="brand">
+            <!-- BRAND -->
+            <a href="https://nomadgcs.com/">
+                <img src="620x140.png" width="310" height="70" style="max-height:70px;height:auto;" alt="Nomad GCS // Connected Mobile Operations Centers Logo">
+            </a>
+        </div>
+
+        <div class="executive-summary">            
+            <div id="title">
+                Total Compensation Calculator
+            </div>
+
+            <div style="width: 100%; display: flex; justify-content: space-around;">
+                <div style="width: 90px; margin: 10px; border: 4px solid var(--main-color)"></div>
+            </div>
+
+            <!-- INSTRUCTIONS -->
+            <div class="instructions">
+                <p>Use this Total Compensation Calculator to explore the estimated value of your potential compensation
+                    and
+                    benefits. By entering a few details, you’ll get a personalized view of how salary, bonuses,
+                    benefits,
+                    and other rewards could add up. It’s a helpful way to understand the full value of what we offer
+                    beyond
+                    just base pay.</p>
+            </div>
+
+            <!-- INPUTS -->
+            <label style="visibility: hidden; height: 0;">Hours/Week: <input type="number" id="hours" value="40" disabled></label>
+            <div class="category inputs">
+                <!-- <div style="display: flex; justify-content: space-between; align-items: center"> -->
+                    <label>Wage ($/hr): <input type="number" id="wage" value="25" tabindex="1"></label>
+                    <button class="button" onclick="calculateCompensation()" tabindex="2">Calculate</button>
+                <!-- </div> -->
+            </div>
+        </div>
+
+        <div id="tagline"></div>
+
+
+        <div class="card" style="border-top: 8px solid var(--main-color)">
+
+            <!-- TOTAL REWARDS -->
+            <div class="category" style="position: relative">
+                <div class="personalized-rewards-heading">Your estimated total compensation</div>
+                <div id="total-rewards"></div>
+            </div>
+
+
+            <!-- 
+      
+        <div class="category">
+            <div id="total-compensation" style="font-size: 2em; font-weight: 700; text-align: center"></div>
+        </div> -->
+
+
+            <!-- CHART -->
+            <div class="chart-container">
+                <canvas id="compChart"></canvas>
+                <div id="chartValue"></div>
+            </div>
+
+            <h1 style="margin-top: 2em">Total Compensation Summary</h1>
+            <!-- <h1 style="margin-top: 2em">Summary</h1> -->
+
+            <div class="category">
+                <h3>Wages + Time Off + Bonus</h3>
+                <div class="item"><span>Estimated Work Pay</span><span id="work-pay"></span></div>
+                <div class="item"><span>Starting PTO: 3 Weeks</span><span id="pto"></span></div>
+                <div class="item"><span>Total Holiday Pay</span><span id="holiday"></span></div>
+                <div class="item"><span>Incentive Bonus</span><span id="bonus"></span></div>
+                <div class="item total"><span>Total</span><span id="total-pay"></span></div>
+            </div>
+
+            <div class="category overtime">
+                <!-- <div style="text-align: center;">10% Overtime Option</div> -->
+                <div class="item"><span>Additional 10% Overtime (as required)</span><span id="overtime"></span></div>
+            </div>
+
+
+            <!-- ----------------------------------------------------------------------------------- -->
+            <!--                                   BENEFITS                                          -->
+            <!-- ----------------------------------------------------------------------------------- -->
+
+
+            <div class="category">
+                <h3>Benefits</h3>
+                <div class="item"><span>Health Insurance</span><span>$15,548.40</span></div>
+                <div class="item"><span>401(k) Match</span><span id="match"></span></div>
+                <div class="item"><span>Health Equity (HSA)</span><span>$1,300.00</span></div>
+                <div class="item"><span>Life Insurance</span><span>$27.60</span></div>
+                <div class="item total"><span>Total</span><span id="benefits"></span></div>
+            </div>
+
+
+            <!-- ----------------------------------------------------------------------------------- -->
+            <!--                                   ADDITIONAL                                        -->
+            <!-- ----------------------------------------------------------------------------------- -->
+
+            <div style="background-color: #efefef; ">
+                <div class="category">
+                    <div>
+                        <h3>Paid Holidays</h3>
+                    </div>
+                    <div class="responsive-grid">
+                        <div>New Years Day</div>
+                        <div>Labor Day</div>
+                        <div>Memorial Day</div>
+                        <div>Thanksgiving Day</div>
+                        <div>Independence Day</div>
+                        <div>Christmas Day</div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <div>
+                        <h3>Additional Benefits</h3>
+                        <div style="margin-bottom: 2rem">
+                            <i>Based on generally utilized benefits selected by the majority of Nomad Employees!</i>
+                        </div>
+                    </div>
+                    <div class="responsive-grid">
+                        <div>Paid Jury Duty</div>
+                        <div>Pro Deals on 1000+ Brands</div>
+                        <div>Paid Maternity / Paternity Leave</div>
+                        <div>Referral Bonus</div>
+                        <div>Tuition Assistance Program</div>
+                        <div>Culture Team</div>
+                        <div>Financial Education Courses</div>
+                        <div>HSA / FSA Healthcare Spending Plans</div>
+                        <div>Local Employee Discounts</div>
+                    </div>
+
+                    <div style="margin-top: 2em; display: flex; justify-content: center;">
+                        <button>
+                            <a href="https://nomadgcs.com/company/careers/">See careers page for more information</a>
+                        </button>
+                    </div>                   
+                </div>
+
+            </div>
+
+
+            <!-- ----------------------------------------------------------------------------------- -->
+            <!--                                   LEGAL                                             -->
+            <!-- ----------------------------------------------------------------------------------- -->
+            <div class="category" style="font-size: 0.9em; padding-bottom: 4em">
+                <div>
+                    <b>Disclaimer:</b>
+                    This tool provides estimates for informational purposes only. All figures are
+                    estimates and may vary based on individual circumstances, job role, location, and company policies.
+                    Actual compensation and benefits are subject to final verification and may change at any time. Use
+                    of
+                    this tool does not create any contractual rights or obligations.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script>
+        let compChart;
+
+        function formatCurrency(value) {
+            return `$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+
+        function formatCurrencyShort(value) {
+            return `$${value.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+        }
+
+        function calculateCompensation() {
+            const wage = parseFloat(document.getElementById('wage').value);
+            const hours = parseFloat(document.getElementById('hours').value);
+            const weeksPerYear = 52;
+
+            const gross = wage * hours * weeksPerYear;
+            const bonus = gross * 0.0249;
+            const match = gross * 0.04;
+            const benefitsTotal = match + 1300 + 15548.4 + 27.6;
+            const total = gross + bonus + benefitsTotal;
+            const overtime = gross * 0.10;
+
+            // v2
+            const pto = wage * 120;
+            const holiday = wage * 56;
+            const workPay = gross - (pto + holiday);
+            const totalPay = gross + bonus;
+
+
+            const tagline = `${formatCurrencyShort(wage)}/Hour = ${formatCurrencyShort(gross)} Yearly`;
+            //const totalCompensation = `Total Rewards (${formatCurrencyShort(gross)}) + (${formatCurrencyShort(benefitsTotal)}) = ${formatCurrencyShort(total)} Yearly`;
+            const totalRewards = total;
+
+            document.getElementById('work-pay').textContent = formatCurrency(workPay);
+            document.getElementById('total-pay').textContent = formatCurrency(totalPay);
+            document.getElementById('bonus').textContent = formatCurrency(bonus);
+            document.getElementById('match').textContent = formatCurrency(match);
+            document.getElementById('benefits').textContent = formatCurrency(benefitsTotal);
+            document.getElementById('overtime').textContent = formatCurrency(overtime);
+            document.getElementById('pto').textContent = formatCurrency(pto);
+            document.getElementById('holiday').textContent = formatCurrency(holiday);
+
+            document.getElementById('tagline').textContent = tagline;
+            // document.getElementById('total-compensation').textContent = totalCompensation;
+            document.getElementById('total-rewards').textContent = formatCurrencyShort(totalRewards);
+
+            updateChart(workPay, pto, holiday, bonus, benefitsTotal, total);
+        }
+
+        function updateChart(gross, pto, holiday, bonus, benefits, total) {
+            const ctx = document.getElementById('compChart').getContext('2d');
+            // document.getElementById('chartValue').innerHTML = `<strong style='font-size: 2.5em; padding-bottom: 0.25em'>${formatCurrency(total)}</strong><span>Estimated Total Compensation</span>`;
+            document.getElementById('chartValue').innerHTML = `<strong>${formatCurrency(total)}</strong><span>Estimated Total Compensation</span>`;
+
+            if (compChart) compChart.destroy();
+            compChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Estimated Work Pay', 'PTO Pay', 'Holiday Pay', 'Incentive Bonus', 'Benefits'],
+                    datasets: [{
+                        data: [gross, pto, holiday, bonus, benefits],
+                        backgroundColor: ['black', '#E2E3E2', 'gray', '#b61d23', '#ce1b22'],
+                        borderColor: 'white',
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    cutout: '75%',
+                    layout: {
+                        padding: {
+                            left: 70,
+                            right: 70,
+                            top: 50,
+                            bottom: 50
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: { enabled: true },
+                        datalabels: {
+                            color: '#000',
+                            font: {
+                                size: 14
+                            },
+                            formatter: (value) => formatCurrency(value),
+                            anchor: 'end',
+                            align: 'end',
+                            offset: 12,
+                            clamp: false
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
+            });
+        }
+
+        calculateCompensation();
+    </script>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="footer" class="copyright-area">
+        <div class="copyright-notice" style="background-color: #222; height:200px; display: flex; justify-content: center; align-items: center;">
+            <div style="color: white; padding-right: 1em;"> Copyright 2025, Nomad Global Communication Solutions </div>
+            <img src="./logo.png" />
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

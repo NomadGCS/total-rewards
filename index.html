@@ -10,7 +10,6 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap');
 
         :root {
-            /* --main-color:  #cc2027; */
             --main-color: #ce1b22;
             --secondary-color: #E2E3E2;
             --tertiary-color: #000;
@@ -43,10 +42,8 @@
 
         .card {
             background: white;
-            /* padding: 1.5rem; */
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            /* max-width: 800px; */
             margin: auto;
             margin: 3em;
         }
@@ -55,7 +52,6 @@
             display: grid;
             grid-template-columns: 70% 30%;
             align-items: center;
-            /* justify-content: space-between; */
             padding: 0.5rem 0;
             border-bottom: 1px solid #eee;
         }
@@ -75,14 +71,23 @@
 
         .total {
             font-weight: bold;
-            /* font-size: 1.6rem; */
             font-size: calc(12px + 1.4vw);
             color: #2c3e50;
+        }
 
+        .border-block {
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .recessed {
+            box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.15), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.15);
         }
 
 
-        /* SECTIONS */
+        /* -------------------------------------------------------------------------------- */
+        /*                                  SECTIONS                                        */
+        /* -------------------------------------------------------------------------------- */
 
         .brand {
             margin: 2em;
@@ -90,7 +95,6 @@
 
         #title {
             font-size: calc(12px + 3.5vw);
-            /* font-size: 3.5rem;  */
             font-weight: 700;
             text-align: center
         }
@@ -115,17 +119,19 @@
         #total-rewards {
             color: var(--main-color);
             font-size: calc(12px + 6.5vw);
-            /* font-size: 6em; */
             text-align: center;
         }
 
         .overtime {
-            border: 2px solid var(--main-color);
+            border: 4px solid var(--main-color);
             color: var(--main-color);
             padding: 1em;
             margin: 1em;
+            margin-inline: 1.5em;
             border-radius: 4px;
             font-style: italic;
+            font-weight: 700;
+            opacity: 0.8;
         }
 
         #tagline {
@@ -135,19 +141,23 @@
             margin-top: 1em;
         }
 
-        /* INPUTS */
 
-        .inputs {            
-            border: 1px solid #ccc;            
+        /* -------------------------------------------------------------------------------- */
+        /*                                  INPUTS                                          */
+        /* -------------------------------------------------------------------------------- */
+
+        .inputs {
+            border: 1px solid #ccc;
             background: #efefef;
             border-radius: 4px;
 
-            display: flex; 
-            justify-content: space-between; 
+            display: flex;
+            justify-content: space-between;
             align-items: center
         }
 
-        input[type="number"] {
+        input[type="number"],
+        input[type="text"] {
             width: 80px;
             padding: 0.2rem;
             margin-left: 0.5rem;
@@ -158,7 +168,6 @@
             font-size: 1.2em;
             display: flex;
             align-items: center;
-            /* margin-bottom: 0.5rem; */
         }
 
         button {
@@ -169,7 +178,7 @@
             border-radius: 4px;
             color: #fff;
             background-color: var(--main-color);
-            padding: 0.5em 1rem;
+            padding: 0.75em 1rem;
             outline: none;
             border: none;
 
@@ -193,16 +202,17 @@
 
         .responsive-grid>div {
             border-bottom: 1px solid #dedede;
-            /* color: purple; */
         }
 
 
-
-        /* CHART */
+        /* -------------------------------------------------------------------------------- */
+        /*                                  CHART                                           */
+        /* -------------------------------------------------------------------------------- */
 
         canvas {
             display: block;
             margin: 2rem auto;
+            margin-bottom: 0;
             width: 100% !important;
             height: auto !important;
         }
@@ -231,28 +241,34 @@
             font-size: clamp(0.8rem, 2vw, 1rem);
         }
 
+        .chart-section {
+            width: 100%;
+            background: #efefef;
+            margin-top: 1em;
+        }
+
         .chart-container {
             position: relative;
-            width: 100%;
-            /* background: #f6f6f6; */
-            background: #efefef;
-            /* max-width: 600px; */
-            aspect-ratio: 1 / 1;
+            width: 65%;
             margin: auto;
+            margin-bottom: 0;
             padding-inline: 4rem;
-            padding-block: 2rem;
             box-sizing: border-box;
-            margin-top: 2em;
         }
 
         /* -------------------------------------------------------------------------------- */
         /*                                  MEDIA QUERIES                                   */
         /* -------------------------------------------------------------------------------- */
 
-        @media (max-width: 799px) {
+        @media (max-width: 1100px) {
+            .chart-container {
+                width: 85%;
+            }
+        }
+
+        @media (max-width: 811px) {
             body {
                 font-size: 14px;
-                /* color: purple; */
             }
 
             .content {
@@ -267,8 +283,8 @@
                 margin-bottom: 2em;
             }
 
-            .card {                
-                margin: 2em;                
+            .card {
+                margin: 2em;
             }
 
             .chart-container {
@@ -277,12 +293,6 @@
             }
 
             #chartValue {
-                top: -45px;
-
-                span {
-                    display: none;
-                }
-
                 strong {
                     font-size: calc(12px + 2.5vw);
                 }
@@ -298,12 +308,18 @@
             }
         }
 
-        @media (max-width: 549px) {
-            body {
-                /* font-size: 12px; */
-                /* color: forestgreen; */
+        @media (max-width: 649px) {
+            #chartValue {
+                top: -45px;
+
+                span {
+                    display: none;
+                }
             }
 
+        }
+
+        @media (max-width: 549px) {
             .executive-summary {
                 padding: 1em;
             }
@@ -331,46 +347,53 @@
 <body>
     <div class="content">
 
+        <!-- BRAND -->
         <div class="brand">
-            <!-- BRAND -->
             <a href="https://nomadgcs.com/">
-                <img src="620x140.png" width="310" height="70" style="max-height:70px;height:auto;" alt="Nomad GCS // Connected Mobile Operations Centers Logo">
+                <img src="620x140.png" width="310" height="70" style="max-height:70px;height:auto;"
+                    alt="Nomad GCS // Connected Mobile Operations Centers Logo">
             </a>
         </div>
 
-        <div class="executive-summary">            
+        <!-- TITLE + INSTRUCTIONS + INPUT -->
+        <div class="executive-summary">
             <div id="title">
                 Total Compensation Calculator
             </div>
 
+            <!-- DECORATIVE HORIZONTAL LINE -->
             <div style="width: 100%; display: flex; justify-content: space-around;">
                 <div style="width: 90px; margin: 10px; border: 4px solid var(--main-color)"></div>
             </div>
 
             <!-- INSTRUCTIONS -->
             <div class="instructions">
-                <p>Use this Total Compensation Calculator to explore the estimated value of your potential compensation
-                    and
-                    benefits. By entering a few details, you’ll get a personalized view of how salary, bonuses,
-                    benefits,
-                    and other rewards could add up. It’s a helpful way to understand the full value of what we offer
-                    beyond
-                    just base pay.</p>
+                <p>
+                    This calculator lets you explore the total value of Nomad’s compensation package, beyond base pay.
+                    Enter the wage for the position you’re interested in for a personalized view of how hourly wages,
+                    bonuses, benefits, and other rewards could add up.*
+                </p>
             </div>
 
+            <!-- HIDDEN INPUT - THIS IS USED IN A CALCULATION AND MAY EVENTUALLY BE DISPLAYED ON THE UI BUT IS NOT CURRENTLY -->
+            <label style="visibility: hidden; height: 0;">Hours/Week: <input type="number" id="hours" value="40"
+                    disabled></label>
+
+
             <!-- INPUTS -->
-            <label style="visibility: hidden; height: 0;">Hours/Week: <input type="number" id="hours" value="40" disabled></label>
             <div class="category inputs">
-                <!-- <div style="display: flex; justify-content: space-between; align-items: center"> -->
-                    <label>Wage ($/hr): <input type="number" id="wage" value="25" tabindex="1"></label>
-                    <button class="button" onclick="calculateCompensation()" tabindex="2">Calculate</button>
-                <!-- </div> -->
+                <!-- Text instead of Number otherwise user won't be able to enter decimals (with the current input sanitizing logic) -->
+                <label>Wage ($/hr): <input type="text" inputmode="decimal" id="wage" value="25" tabindex="1"></label>
+
+                <!-- SUBMIT BUTTON -->
+                <button class="button" onclick="calculateCompensation()" tabindex="2">Calculate</button>
             </div>
         </div>
 
+        <!-- HOURLY RATE TO ANNUAL SALARY -->
         <div id="tagline"></div>
 
-
+        <!-- SUMMARY CARD -->
         <div class="card" style="border-top: 8px solid var(--main-color)">
 
             <!-- TOTAL REWARDS -->
@@ -379,34 +402,25 @@
                 <div id="total-rewards"></div>
             </div>
 
-
-            <!-- 
-      
-        <div class="category">
-            <div id="total-compensation" style="font-size: 2em; font-weight: 700; text-align: center"></div>
-        </div> -->
-
-
             <!-- CHART -->
-            <div class="chart-container">
-                <canvas id="compChart"></canvas>
-                <div id="chartValue"></div>
-            </div>
+            <section class="chart-section border-block1">
+                <div class="chart-container">
+                    <canvas id="compChart"></canvas>
+                    <div id="chartValue"></div>
+                </div>
+            </section>
 
             <h1 style="margin-top: 2em">Total Compensation Summary</h1>
-            <!-- <h1 style="margin-top: 2em">Summary</h1> -->
 
             <div class="category">
-                <h3>Wages + Time Off + Bonus</h3>
+                <h3>Wages + Time Off</h3>
                 <div class="item"><span>Estimated Work Pay</span><span id="work-pay"></span></div>
                 <div class="item"><span>Starting PTO: 3 Weeks</span><span id="pto"></span></div>
                 <div class="item"><span>Total Holiday Pay</span><span id="holiday"></span></div>
-                <div class="item"><span>Incentive Bonus</span><span id="bonus"></span></div>
                 <div class="item total"><span>Total</span><span id="total-pay"></span></div>
             </div>
 
             <div class="category overtime">
-                <!-- <div style="text-align: center;">10% Overtime Option</div> -->
                 <div class="item"><span>Additional 10% Overtime (as required)</span><span id="overtime"></span></div>
             </div>
 
@@ -415,11 +429,11 @@
             <!--                                   BENEFITS                                          -->
             <!-- ----------------------------------------------------------------------------------- -->
 
-
             <div class="category">
-                <h3>Benefits</h3>
+                <h3>Potential Benefits</h3>
                 <div class="item"><span>Health Insurance</span><span>$15,548.40</span></div>
                 <div class="item"><span>401(k) Match</span><span id="match"></span></div>
+                <div class="item"><span>Incentive Bonus</span><span id="bonus"></span></div>
                 <div class="item"><span>Health Equity (HSA)</span><span>$1,300.00</span></div>
                 <div class="item"><span>Life Insurance</span><span>$27.60</span></div>
                 <div class="item total"><span>Total</span><span id="benefits"></span></div>
@@ -430,8 +444,8 @@
             <!--                                   ADDITIONAL                                        -->
             <!-- ----------------------------------------------------------------------------------- -->
 
-            <div style="background-color: #efefef; ">
-                <div class="category">
+            <div class="border-block1 recessed1" style="background-color: #efefef;">
+                <div class="category" style="margin-top: 0">
                     <div>
                         <h3>Paid Holidays</h3>
                     </div>
@@ -468,7 +482,7 @@
                         <button>
                             <a href="https://nomadgcs.com/company/careers/">See careers page for more information</a>
                         </button>
-                    </div>                   
+                    </div>
                 </div>
 
             </div>
@@ -479,7 +493,7 @@
             <!-- ----------------------------------------------------------------------------------- -->
             <div class="category" style="font-size: 0.9em; padding-bottom: 4em">
                 <div>
-                    <b>Disclaimer:</b>
+                    <b>* Disclaimer:</b>
                     This tool provides estimates for informational purposes only. All figures are
                     estimates and may vary based on individual circumstances, job role, location, and company policies.
                     Actual compensation and benefits are subject to final verification and may change at any time. Use
@@ -497,6 +511,33 @@
     <script>
         let compChart;
 
+        // make sure the user can only enter positive numbers.  
+        function ensureValidUserInput() {
+            const input = document.getElementById("wage");
+
+            input.addEventListener("keydown", function (e) {
+                // Block dash, plus, 'e', or 'E'
+                if (['-', '+', 'e', 'E'].includes(e.key)) {
+                    e.preventDefault();
+                }
+            });
+
+            input.addEventListener("input", function () {
+                let value = input.value;
+
+                // Remove all characters except digits and decimal point
+                value = value.replace(/[^\d.]/g, '');
+
+                // Ensure only one decimal point is allowed
+                const parts = value.split('.');
+                if (parts.length > 2) {
+                    value = parts[0] + '.' + parts.slice(1).join('');
+                }
+
+                input.value = value;
+            });
+        }
+
         function formatCurrency(value) {
             return `$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         }
@@ -511,21 +552,21 @@
             const weeksPerYear = 52;
 
             const gross = wage * hours * weeksPerYear;
-            const bonus = gross * 0.0249;
-            const match = gross * 0.04;
-            const benefitsTotal = match + 1300 + 15548.4 + 27.6;
-            const total = gross + bonus + benefitsTotal;
+            const bonus = gross * 0.0249;   // incentive bonus
+            const match = gross * 0.04;     // 401k match
+            const benefitsWithoutBonus = match + 1300 + 15548.4 + 27.6;
+            const benefitsTotal = bonus + match + 1300 + 15548.4 + 27.6;
+            const total = gross + benefitsTotal;
             const overtime = gross * 0.10;
 
             // v2
             const pto = wage * 120;
             const holiday = wage * 56;
             const workPay = gross - (pto + holiday);
-            const totalPay = gross + bonus;
+            const totalPay = workPay + holiday + pto; //gross + bonus;
 
 
-            const tagline = `${formatCurrencyShort(wage)}/Hour = ${formatCurrencyShort(gross)} Yearly`;
-            //const totalCompensation = `Total Rewards (${formatCurrencyShort(gross)}) + (${formatCurrencyShort(benefitsTotal)}) = ${formatCurrencyShort(total)} Yearly`;
+            const tagline = `${formatCurrency(wage)}/Hour = ${formatCurrencyShort(gross)} Yearly`;
             const totalRewards = total;
 
             document.getElementById('work-pay').textContent = formatCurrency(workPay);
@@ -538,75 +579,91 @@
             document.getElementById('holiday').textContent = formatCurrency(holiday);
 
             document.getElementById('tagline').textContent = tagline;
-            // document.getElementById('total-compensation').textContent = totalCompensation;
             document.getElementById('total-rewards').textContent = formatCurrencyShort(totalRewards);
 
-            updateChart(workPay, pto, holiday, bonus, benefitsTotal, total);
+            updateChart(workPay, pto, holiday, bonus, benefitsWithoutBonus, total);
         }
 
         function updateChart(gross, pto, holiday, bonus, benefits, total) {
+            console.log("Chart updated");
+
             const ctx = document.getElementById('compChart').getContext('2d');
-            // document.getElementById('chartValue').innerHTML = `<strong style='font-size: 2.5em; padding-bottom: 0.25em'>${formatCurrency(total)}</strong><span>Estimated Total Compensation</span>`;
             document.getElementById('chartValue').innerHTML = `<strong>${formatCurrency(total)}</strong><span>Estimated Total Compensation</span>`;
 
-            if (compChart) compChart.destroy();
-            compChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Estimated Work Pay', 'PTO Pay', 'Holiday Pay', 'Incentive Bonus', 'Benefits'],
-                    datasets: [{
-                        data: [gross, pto, holiday, bonus, benefits],
-                        backgroundColor: ['black', '#E2E3E2', 'gray', '#b61d23', '#ce1b22'],
-                        borderColor: 'white',
-                        borderWidth: 4,
-                        hoverOffset: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    cutout: '75%',
-                    layout: {
-                        padding: {
-                            left: 70,
-                            right: 70,
-                            top: 50,
-                            bottom: 50
+            if (!compChart) {
+                compChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Estimated Work Pay', 'PTO Pay', 'Holiday Pay', 'Incentive Bonus', 'Benefits'],
+                        datasets: [{
+                            data: [gross, pto, holiday, bonus, benefits],
+                            backgroundColor: ['black', '#E2E3E2', 'gray', '#b61d23', '#ce1b22'],
+                            borderColor: 'white',
+                            borderWidth: 4,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: {
+                        // animation: false,
+                        responsive: false,          // when true it seems to slightly "jitter"
+                        maintainAspectRatio: true,
+                        cutout: '75%',
+                        layout: {
+                            padding: {
+                                left: 70,
+                                right: 70,
+                                top: 50,
+                                bottom: 50
+                            }
+                        },
+                        plugins: {
+                            legend: { position: 'bottom' },
+                            tooltip: {
+                                enabled: true,
+                                callbacks: {
+                                    label: function (context) {
+                                        const value = context.parsed;
+                                        return ` $${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                color: '#000',
+                                font: {
+                                    size: 14
+                                },
+                                formatter: (value) => formatCurrency(value),
+                                anchor: 'end',
+                                align: 'end',
+                                offset: 12,
+                                clamp: false
+                            }
                         }
                     },
-                    plugins: {
-                        legend: { position: 'bottom' },
-                        tooltip: { enabled: true },
-                        datalabels: {
-                            color: '#000',
-                            font: {
-                                size: 14
-                            },
-                            formatter: (value) => formatCurrency(value),
-                            anchor: 'end',
-                            align: 'end',
-                            offset: 12,
-                            clamp: false
-                        }
-                    }
-                },
-                plugins: [ChartDataLabels]
-            });
+                    plugins: [ChartDataLabels]
+                });
+            }
+            else {
+                // Just update the data — no destruction needed
+                compChart.data.datasets[0].data = [gross, pto, holiday, bonus, benefits];
+                compChart.update();
+            }
         }
 
         calculateCompensation();
+        ensureValidUserInput();
     </script>
     </div>
 
     <!-- FOOTER -->
     <footer id="footer" class="copyright-area">
-        <div class="copyright-notice" style="background-color: #222; height:200px; display: flex; justify-content: center; align-items: center;">
-            <div style="color: white; padding-right: 1em;"> Copyright 2025, Nomad Global Communication Solutions </div>
+        <div class="copyright-notice"
+            style="background-color: #222; height:200px; display: flex; justify-content: center; align-items: center;">
             <img src="./logo.png" />
+            &nbsp;&nbsp;
+            <div style="color: white;"> Copyright 2025, Nomad Global Communication Solutions </div>
         </div>
-
     </footer>
-
 </body>
 
 </html>

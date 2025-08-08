@@ -1,18 +1,46 @@
-# total-rewards
+# Total Rewards
 
-Online calculator to estimate a potential employees pay and benefits.  Used by HR and Marketing to attract new talent.  Deployed via github pages and linked from the public nomadgcs website careers page.
+An online calculator to estimate a potential employee’s pay and benefits.  
+Used by **HR** and **Marketing** to attract new talent.  This is currently used in production as of August 2025.
 
-URL:  https://nomadgcs.github.io/totalrewards/
+🚀 **Live Site**: [https://nomadgcs.github.io/totalrewards/](https://nomadgcs.github.io/totalrewards/)  
+🌐 Linked from the [NomadGCS Careers page](https://nomadgcs.com/careers)
 
-**Customers** 
-Primary - HR (Clay)
-Secondary - Marketing (Mike)
+---
 
-**How to make changes**
-Any pushes to the master branch will kick off github's default automated build and deploy process for github pages.  So anytime you push to master, the changes will go live.  Sidenote - there are no custom ci/cd scripts for this, its all out of the box github pages ci/cd.
+## 👥 Stakeholders
 
-**🔥 Important**
-- This repository needs to be PUBLIC so it can be hosted on github pages.  This page is referenced by MARKETING on the NomadGCS public website.
-- There is no test environment (and doesn't need to be at this point).
-- The UI/UX needs to match the public nomadgcs website as this is just an extension of that site.  Have Marketing review if you are unsure.
-- HR and Marketing are the owners of this app so any changes need their approval.
+- **Primary**: HR – Clay  
+- **Secondary**: Marketing – Mike
+
+---
+
+## 🛠️ Deployment & Updates
+
+- This app is hosted using **GitHub Pages**.
+- **Any push to the `master` branch** will automatically trigger GitHub Pages to build and deploy.
+- No custom CI/CD – GitHub’s default build system is used.
+
+---
+
+## 🔥 Important Notes
+
+- 📢 This repository **must remain PUBLIC** in order to be hosted via GitHub Pages.
+- 🧪 There is **no test/staging environment** (intentionally).
+- 🎨 The **UI/UX must match** the public NomadGCS website.  
+  ➤ If unsure, check with **Marketing** for design review.
+- ✅ All changes must be approved by the **owners**:
+  - **HR**
+  - **Marketing**
+
+---
+
+## 💡 Quick Summary
+
+| Area         | Detail                                 |
+|--------------|----------------------------------------|
+| Purpose      | Recruit potential employees            |
+| Hosted On    | GitHub Pages                           |
+| Deployment   | Auto-deploys on push to `master`       |
+| Stakeholders | HR (Clay), Marketing (Mike)            |
+| URL          | [https://nomadgcs.github.io/totalrewards/](https://nomadgcs.github.io/totalrewards/) |

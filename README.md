@@ -4,11 +4,11 @@ Online calculator to estimate a potential employees pay and benefits.  Used by H
 
 URL:  https://nomadgcs.github.io/totalrewards/
 
-** Customers ** 
+**Customers** 
 Primary - HR (Clay)
 Secondary - Marketing (Mike)
 
-** How to make changes **
+**How to make changes**
 Any pushes to the master branch will kick off github's default automated build and deploy process for github pages.  So anytime you push to master, the changes will go live.  Sidenote - there are no custom ci/cd scripts for this, its all out of the box github pages ci/cd.
 
 **🔥 Important**

@@ -1,7 +1,9 @@
 # Total Rewards
 
 An online calculator to estimate a potential employee’s pay and benefits.  
-Used by **HR** and **Marketing** to attract new talent.  This is currently used in production as of August 2025.
+Used by **HR** and **Marketing** to attract new talent.  This is currently used in production as of August 2025 on the careers page of the NomadGCS public website:  https://nomadgcs.com/company/careers/
+
+
 
 🚀 **Live Site**: [https://nomadgcs.github.io/totalrewards/](https://nomadgcs.github.io/totalrewards/)  
 🌐 Linked from the [NomadGCS Careers page](https://nomadgcs.com/careers)

@@ -3,6 +3,7 @@
 An online calculator to estimate a potential employee’s pay and benefits.  
 Used by **HR** and **Marketing** to attract new talent.  This is currently used in production as of August 2025 on the careers page of the NomadGCS public website:  https://nomadgcs.com/company/careers/
 
+**This repo needs to remain PUBLIC or the github page it is hosted on may get disabled and users will see a 404**
 
 
 🚀 **Live Site**: [https://nomadgcs.github.io/totalrewards/](https://nomadgcs.github.io/totalrewards/)  
